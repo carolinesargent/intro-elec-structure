@@ -1,0 +1,29 @@
+# PSI4 file for H2 RHF energy
+
+memory 10 GB
+
+molecule mol {
+0 1
+H 
+H 1 R
+}
+
+Rvals = [.25,.5,.75,1,1.25,1.5,2,3,4]
+
+table = Table(rows=["R"], cols=["E(HF)"])
+
+set {
+  scf_type df
+  mp2_type df
+  cc_type df
+  freeze_core true
+}
+
+for R in Rvals:
+    mol.R = R
+    erhf = energy('hf/sto-3g')
+    table[R] = [erhf]
+
+print_out('Table of Results \n')
+print_out(str(table))
+

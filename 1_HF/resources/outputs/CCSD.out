@@ -1,0 +1,3040 @@
+
+    -----------------------------------------------------------------------
+          Psi4: An Open-Source Ab Initio Electronic Structure Package
+                               Psi4 1.3.2 release
+
+                         Git: Rev {} zzzzzzz 
+
+
+    R. M. Parrish, L. A. Burns, D. G. A. Smith, A. C. Simmonett,
+    A. E. DePrince III, E. G. Hohenstein, U. Bozkaya, A. Yu. Sokolov,
+    R. Di Remigio, R. M. Richard, J. F. Gonthier, A. M. James,
+    H. R. McAlexander, A. Kumar, M. Saitow, X. Wang, B. P. Pritchard,
+    P. Verma, H. F. Schaefer III, K. Patkowski, R. A. King, E. F. Valeev,
+    F. A. Evangelista, J. M. Turney, T. D. Crawford, and C. D. Sherrill,
+    J. Chem. Theory Comput. 13(7) pp 3185--3197 (2017).
+    (doi: 10.1021/acs.jctc.7b00174)
+
+
+                         Additional Contributions by
+    P. Kraus, H. Kruse, M. H. Lechner, M. C. Schieber, R. A. Shaw,
+    A. Alenaizan, R. Galvelis, Z. L. Glick, S. Lehtola, and J. P. Misiewicz
+
+    -----------------------------------------------------------------------
+
+
+    Psi4 started on: Tuesday, 17 May 2022 04:41PM
+
+    Process ID: 56380
+    Host:       atl1-1-02-012-10-l.pace.gatech.edu
+    PSIDATADIR: /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4
+    Memory:     500.0 MiB
+    Threads:    1
+    
+  ==> Input File <==
+
+--------------------------------------------------------------------------
+# PSI4 file for H2 CCSD energy
+
+memory 10 GB
+
+molecule mol {
+0 1
+H 
+H 1 R
+}
+
+Rvals = [.25,.5,.75,1,1.25,1.5,2,3,4]
+
+table = Table(rows=["R"], cols=["E(CCSD)"])
+
+set {
+  scf_type df
+  mp2_type df
+  cc_type df
+  freeze_core true
+}
+
+for R in Rvals:
+    mol.R = R
+    eccsd = energy('ccsd/sto-3g')
+    table[R] = [eccsd]
+
+print_out('Table of Results \n')
+print_out(str(table))
+
+--------------------------------------------------------------------------
+
+  Memory set to   9.313 GiB by Python driver.
+Molecule: geometry: Molecule is not complete, please use 'update_geometry'
+                    once all variables are set.
+Molecule: Setting geometry variable R to 0.250000
+    Method 'CCSD' requires SCF_TYPE = DISK_DF, setting.
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:02 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              RHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: d2h
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -0.125000000000     1.007825032230
+         H            0.000000000000     0.000000000000     0.125000000000     1.007825032230
+
+  Running in d2h symmetry.
+
+  Rotational constants: A = ************  B =    535.25574  C =    535.25574 [cm^-1]
+  Rotational constants: A = ************  B = 16046563.40727  C = 16046563.40727 [MHz]
+  Nuclear repulsion =    2.116708842679999
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DISK_DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is SAD.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     Ag         1       1       0       0       0       0
+     B1g        0       0       0       0       0       0
+     B2g        0       0       0       0       0       0
+     B3g        0       0       0       0       0       0
+     Au         0       0       0       0       0       0
+     B1u        1       1       0       0       0       0
+     B2u        0       0       0       0       0       0
+     B3u        0       0       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  ==> DiskDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    OpenMP threads:              1
+    Integrals threads:           1
+    Memory [MiB]:             7152
+    Algorithm:                Core
+    Integral Cache:           SAVE
+    Schwarz Cutoff:          1E-12
+    Fitting Condition:       1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 5.3438352523E-02.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF.
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-RHF iter SAD:    -0.18268261904443   -1.82683e-01   0.00000e+00 
+   @DF-RHF iter   1:    -0.30503538613501   -1.22353e-01   0.00000e+00 DIIS
+   @DF-RHF iter   2:    -0.30503538613501    0.00000e+00   0.00000e+00 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1Ag    -0.831640  
+
+    Virtual:                                                              
+
+       1B1u    1.473076  
+
+    Final Occupation by Irrep:
+             Ag   B1g   B2g   B3g    Au   B1u   B2u   B3u 
+    DOCC [     1,    0,    0,    0,    0,    0,    0,    0 ]
+
+  @DF-RHF Final Energy:    -0.30503538613501
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              2.1167088426799991
+    One-Electron Energy =                  -3.1802084936160044
+    Two-Electron Energy =                   0.7584642648009963
+    Total Energy =                         -0.3050353861350090
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:02 2022
+Module time:
+	user time   =       0.26 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       0.26 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+
+  A requested method does not make use of molecular symmetry: further calculations in C1 point group.
+
+  Constructing Basis Sets for FNOCC...
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: RIFIT
+    Keyword: DF_BASIS_CC
+    atoms 1-2 entry H          line    24 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-qzvpp-ri.gbs 
+
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:02 2022
+
+
+
+        *******************************************************
+        *                                                     *
+        *                       DF-CCSD                       *
+        *                 Density-fitted CCSD                 *
+        *                                                     *
+        *                   Eugene DePrince                   *
+        *                                                     *
+        *******************************************************
+
+
+  ==> 3-index integrals <==
+
+  ==> DF Tensor (by Rob Parrish) <==
+
+ => Primary Basis Set <= 
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+ => Auxiliary Basis Set <= 
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-QZVPP-RI
+    Number of shells: 32
+    Number of basis function: 112
+    Number of Cartesian functions: 142
+    Spherical Harmonics?: true
+    Max angular momentum: 4
+
+    Number of auxiliary functions:         112
+
+  ==> Memory <==
+
+        Total memory available:            9536.74 mb
+
+        CCSD memory requirements:             0.01 mb
+            3-index integrals:                0.00 mb
+            CCSD intermediates:               0.00 mb
+
+  ==> Input parameters <==
+
+        Freeze core orbitals?                  no
+        Use frozen natural orbitals?           no
+        r_convergence:                  1.000e-07
+        e_convergence:                  1.000e-06
+        Number of DIIS vectors:                 8
+        Number of frozen core orbitals:         0
+        Number of active occupied orbitals:     1
+        Number of active virtual orbitals:      1
+        Number of frozen virtual orbitals:      0
+
+
+  Begin singles and doubles coupled cluster iterations
+
+   Iter  DIIS          Energy       d(Energy)          |d(T)|     time
+      0   0 1   -0.0055037023   -0.0055037023    0.0345544347        0
+      1   1 1   -0.0068419559   -0.0013382536    0.0084020890        0
+      2   2 1   -0.0071653728   -0.0003234168    0.0020305397        0
+      3   3 1   -0.0072683554   -0.0001029826    0.0004899902        0
+      4   4 1   -0.0072660996    0.0000022558    0.0000006124        0
+      5   5 1   -0.0072682257   -0.0000021261    0.0000101343        0
+      6   6 1   -0.0072682847   -0.0000000590    0.0000000054        0
+
+  CCSD iterations converged!
+
+        T1 diagnostic:                        0.000000000000
+        D1 diagnostic:                        0.000000000000
+
+        OS MP2 correlation energy:           -0.005503702338
+        SS MP2 correlation energy:            0.000000000000
+        MP2 correlation energy:              -0.005503702338
+      * MP2 total energy:                    -0.310539088473
+
+        OS CCSD correlation energy:          -0.007268284671
+        SS CCSD correlation energy:           0.000000000000
+        CCSD correlation energy:             -0.007268284671
+      * CCSD total energy:                   -0.312303670806
+
+  Total time for CCSD iterations:       0.00 s (user)
+                                        0.01 s (system)
+                                           0 s (total)
+
+  Time per iteration:                   0.00 s (user)
+                                        0.00 s (system)
+                                        0.00 s (total)
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:03 2022
+Module time:
+	user time   =       0.02 seconds =       0.00 minutes
+	system time =       0.02 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       0.44 seconds =       0.01 minutes
+	system time =       0.03 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:03 2022
+Module time:
+	user time   =       0.02 seconds =       0.00 minutes
+	system time =       0.02 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       0.44 seconds =       0.01 minutes
+	system time =       0.03 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Molecule: Setting geometry variable R to 0.500000
+    Method 'CCSD' requires SCF_TYPE = DISK_DF, setting.
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:03 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              RHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: d2h
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -0.250000000000     1.007825032230
+         H            0.000000000000     0.000000000000     0.250000000000     1.007825032230
+
+  Running in d2h symmetry.
+
+  Rotational constants: A = ************  B =    133.81394  C =    133.81394 [cm^-1]
+  Rotational constants: A = ************  B = 4011640.85182  C = 4011640.85182 [MHz]
+  Nuclear repulsion =    1.058354421340000
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DISK_DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is SAD.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     Ag         1       1       0       0       0       0
+     B1g        0       0       0       0       0       0
+     B2g        0       0       0       0       0       0
+     B3g        0       0       0       0       0       0
+     Au         0       0       0       0       0       0
+     B1u        1       1       0       0       0       0
+     B2u        0       0       0       0       0       0
+     B3u        0       0       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  ==> DiskDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    OpenMP threads:              1
+    Integrals threads:           1
+    Memory [MiB]:             7152
+    Algorithm:                Core
+    Integral Cache:           SAVE
+    Schwarz Cutoff:          1E-12
+    Fitting Condition:       1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 1.8528190617E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF.
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-RHF iter SAD:    -0.74071438631821   -7.40714e-01   0.00000e+00 
+   @DF-RHF iter   1:    -1.04302277948899   -3.02308e-01   0.00000e+00 DIIS
+   @DF-RHF iter   2:    -1.04302277948899    0.00000e+00   0.00000e+00 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1Ag    -0.690849  
+
+    Virtual:                                                              
+
+       1B1u    0.988451  
+
+    Final Occupation by Irrep:
+             Ag   B1g   B2g   B3g    Au   B1u   B2u   B3u 
+    DOCC [     1,    0,    0,    0,    0,    0,    0,    0 ]
+
+  @DF-RHF Final Energy:    -1.04302277948899
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              1.0583544213399996
+    One-Electron Energy =                  -2.8210567351051505
+    Two-Electron Energy =                   0.7196795342761582
+    Total Energy =                         -1.0430227794889928
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:03 2022
+Module time:
+	user time   =       0.21 seconds =       0.00 minutes
+	system time =       0.00 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       0.66 seconds =       0.01 minutes
+	system time =       0.03 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+
+  A requested method does not make use of molecular symmetry: further calculations in C1 point group.
+
+  Constructing Basis Sets for FNOCC...
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: RIFIT
+    Keyword: DF_BASIS_CC
+    atoms 1-2 entry H          line    24 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-qzvpp-ri.gbs 
+
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:03 2022
+
+
+
+        *******************************************************
+        *                                                     *
+        *                       DF-CCSD                       *
+        *                 Density-fitted CCSD                 *
+        *                                                     *
+        *                   Eugene DePrince                   *
+        *                                                     *
+        *******************************************************
+
+
+  ==> 3-index integrals <==
+
+  ==> DF Tensor (by Rob Parrish) <==
+
+ => Primary Basis Set <= 
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+ => Auxiliary Basis Set <= 
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-QZVPP-RI
+    Number of shells: 32
+    Number of basis function: 112
+    Number of Cartesian functions: 142
+    Spherical Harmonics?: true
+    Max angular momentum: 4
+
+    Number of auxiliary functions:         112
+
+  ==> Memory <==
+
+        Total memory available:            9536.74 mb
+
+        CCSD memory requirements:             0.01 mb
+            3-index integrals:                0.00 mb
+            CCSD intermediates:               0.00 mb
+
+  ==> Input parameters <==
+
+        Freeze core orbitals?                  no
+        Use frozen natural orbitals?           no
+        r_convergence:                  1.000e-07
+        e_convergence:                  1.000e-06
+        Number of DIIS vectors:                 8
+        Number of frozen core orbitals:         0
+        Number of active occupied orbitals:     1
+        Number of active virtual orbitals:      1
+        Number of frozen virtual orbitals:      0
+
+
+  Begin singles and doubles coupled cluster iterations
+
+   Iter  DIIS          Energy       d(Energy)          |d(T)|     time
+      0   0 1   -0.0084905762   -0.0084905762    0.0502793252        0
+      1   1 1   -0.0110646545   -0.0025740783    0.0152431255        0
+      2   2 1   -0.0118365547   -0.0007719003    0.0045710236        0
+      3   3 1   -0.0121680052   -0.0003314505    0.0013661792        0
+      4   4 1   -0.0121591650    0.0000088403    0.0000106113        0
+      5   5 1   -0.0121726466   -0.0000134816    0.0000261148        0
+      6   6 1   -0.0121653552    0.0000072914    0.0000298935        1
+      7   7 1   -0.0121653136    0.0000000416    0.0000003981        0
+      8   8 1   -0.0121652229    0.0000000907    0.0000005710        0
+      9   8 2   -0.0121654510   -0.0000002281    0.0000009477        0
+     10   8 3   -0.0121654510    0.0000000000    0.0000000001        0
+
+  CCSD iterations converged!
+
+        T1 diagnostic:                        0.000000000000
+        D1 diagnostic:                        0.000000000000
+
+        OS MP2 correlation energy:           -0.008490576205
+        SS MP2 correlation energy:            0.000000000000
+        MP2 correlation energy:              -0.008490576205
+      * MP2 total energy:                    -1.051513355694
+
+        OS CCSD correlation energy:          -0.012165451013
+        SS CCSD correlation energy:           0.000000000000
+        CCSD correlation energy:             -0.012165451013
+      * CCSD total energy:                   -1.055188230502
+
+  Total time for CCSD iterations:       0.01 s (user)
+                                        0.02 s (system)
+                                           1 s (total)
+
+  Time per iteration:                   0.00 s (user)
+                                        0.00 s (system)
+                                        0.10 s (total)
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:04 2022
+Module time:
+	user time   =       0.03 seconds =       0.00 minutes
+	system time =       0.02 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       0.85 seconds =       0.01 minutes
+	system time =       0.05 seconds =       0.00 minutes
+	total time  =          2 seconds =       0.03 minutes
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:04 2022
+Module time:
+	user time   =       0.03 seconds =       0.00 minutes
+	system time =       0.02 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       0.85 seconds =       0.01 minutes
+	system time =       0.05 seconds =       0.00 minutes
+	total time  =          2 seconds =       0.03 minutes
+Molecule: Setting geometry variable R to 0.750000
+    Method 'CCSD' requires SCF_TYPE = DISK_DF, setting.
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:04 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              RHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: d2h
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -0.375000000000     1.007825032230
+         H            0.000000000000     0.000000000000     0.375000000000     1.007825032230
+
+  Running in d2h symmetry.
+
+  Rotational constants: A = ************  B =     59.47286  C =     59.47286 [cm^-1]
+  Rotational constants: A = ************  B = 1782951.48970  C = 1782951.48970 [MHz]
+  Nuclear repulsion =    0.705569614226667
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DISK_DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is SAD.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     Ag         1       1       0       0       0       0
+     B1g        0       0       0       0       0       0
+     B2g        0       0       0       0       0       0
+     B3g        0       0       0       0       0       0
+     Au         0       0       0       0       0       0
+     B1u        1       1       0       0       0       0
+     B2u        0       0       0       0       0       0
+     B3u        0       0       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  ==> DiskDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    OpenMP threads:              1
+    Integrals threads:           1
+    Memory [MiB]:             7152
+    Algorithm:                Core
+    Integral Cache:           SAVE
+    Schwarz Cutoff:          1E-12
+    Fitting Condition:       1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 3.4666620404E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF.
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-RHF iter SAD:    -0.71553513353305   -7.15535e-01   0.00000e+00 
+   @DF-RHF iter   1:    -1.11617538632217   -4.00640e-01   0.00000e+00 DIIS
+   @DF-RHF iter   2:    -1.11617538632217    0.00000e+00   0.00000e+00 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1Ag    -0.574460  
+
+    Virtual:                                                              
+
+       1B1u    0.660725  
+
+    Final Occupation by Irrep:
+             Ag   B1g   B2g   B3g    Au   B1u   B2u   B3u 
+    DOCC [     1,    0,    0,    0,    0,    0,    0,    0 ]
+
+  @DF-RHF Final Energy:    -1.11617538632217
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.7055696142266671
+    One-Electron Energy =                  -2.4945690100218449
+    Two-Electron Energy =                   0.6728240094730041
+    Total Energy =                         -1.1161753863221739
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:04 2022
+Module time:
+	user time   =       0.20 seconds =       0.00 minutes
+	system time =       0.00 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       1.06 seconds =       0.02 minutes
+	system time =       0.06 seconds =       0.00 minutes
+	total time  =          2 seconds =       0.03 minutes
+
+  A requested method does not make use of molecular symmetry: further calculations in C1 point group.
+
+  Constructing Basis Sets for FNOCC...
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: RIFIT
+    Keyword: DF_BASIS_CC
+    atoms 1-2 entry H          line    24 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-qzvpp-ri.gbs 
+
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:04 2022
+
+
+
+        *******************************************************
+        *                                                     *
+        *                       DF-CCSD                       *
+        *                 Density-fitted CCSD                 *
+        *                                                     *
+        *                   Eugene DePrince                   *
+        *                                                     *
+        *******************************************************
+
+
+  ==> 3-index integrals <==
+
+  ==> DF Tensor (by Rob Parrish) <==
+
+ => Primary Basis Set <= 
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+ => Auxiliary Basis Set <= 
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-QZVPP-RI
+    Number of shells: 32
+    Number of basis function: 112
+    Number of Cartesian functions: 142
+    Spherical Harmonics?: true
+    Max angular momentum: 4
+
+    Number of auxiliary functions:         112
+
+  ==> Memory <==
+
+        Total memory available:            9536.74 mb
+
+        CCSD memory requirements:             0.01 mb
+            3-index integrals:                0.00 mb
+            CCSD intermediates:               0.00 mb
+
+  ==> Input parameters <==
+
+        Freeze core orbitals?                  no
+        Use frozen natural orbitals?           no
+        r_convergence:                  1.000e-07
+        e_convergence:                  1.000e-06
+        Number of DIIS vectors:                 8
+        Number of frozen core orbitals:         0
+        Number of active occupied orbitals:     1
+        Number of active virtual orbitals:      1
+        Number of frozen virtual orbitals:      0
+
+
+  Begin singles and doubles coupled cluster iterations
+
+   Iter  DIIS          Energy       d(Energy)          |d(T)|     time
+      0   0 1   -0.0133744423   -0.0133744423    0.0735794893        0
+      1   1 1   -0.0182596204   -0.0048851781    0.0268758057        0
+      2   2 1   -0.0200078827   -0.0017482623    0.0096180646        0
+      3   3 1   -0.0209755755   -0.0009676928    0.0034161975        0
+      4   4 1   -0.0209787363   -0.0000031608    0.0000224940        0
+      5   5 1   -0.0209467830    0.0000319533    0.0000337326        0
+      6   6 1   -0.0209702050   -0.0000234220    0.0000798804        0
+      7   7 1   -0.0209690693    0.0000011356    0.0000033983        0
+      8   8 1   -0.0209729402   -0.0000038708    0.0000006397        0
+      9   8 2   -0.0209692879    0.0000036522    0.0000131236        1
+     10   8 3   -0.0209692482    0.0000000398    0.0000001376        0
+     11   8 4   -0.0209692492   -0.0000000011    0.0000000038        0
+
+  CCSD iterations converged!
+
+        T1 diagnostic:                        0.000000000000
+        D1 diagnostic:                        0.000000000000
+
+        OS MP2 correlation energy:           -0.013374442260
+        SS MP2 correlation energy:            0.000000000000
+        MP2 correlation energy:              -0.013374442260
+      * MP2 total energy:                    -1.129549828582
+
+        OS CCSD correlation energy:          -0.020969249244
+        SS CCSD correlation energy:           0.000000000000
+        CCSD correlation energy:             -0.020969249244
+      * CCSD total energy:                   -1.137144635566
+
+  Total time for CCSD iterations:       0.01 s (user)
+                                        0.02 s (system)
+                                           1 s (total)
+
+  Time per iteration:                   0.00 s (user)
+                                        0.00 s (system)
+                                        0.09 s (total)
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:05 2022
+Module time:
+	user time   =       0.03 seconds =       0.00 minutes
+	system time =       0.02 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       1.25 seconds =       0.02 minutes
+	system time =       0.08 seconds =       0.00 minutes
+	total time  =          3 seconds =       0.05 minutes
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:05 2022
+Module time:
+	user time   =       0.03 seconds =       0.00 minutes
+	system time =       0.02 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       1.25 seconds =       0.02 minutes
+	system time =       0.08 seconds =       0.00 minutes
+	total time  =          3 seconds =       0.05 minutes
+Molecule: Setting geometry variable R to 1.000000
+    Method 'CCSD' requires SCF_TYPE = DISK_DF, setting.
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:05 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              RHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: d2h
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -0.500000000000     1.007825032230
+         H            0.000000000000     0.000000000000     0.500000000000     1.007825032230
+
+  Running in d2h symmetry.
+
+  Rotational constants: A = ************  B =     33.45348  C =     33.45348 [cm^-1]
+  Rotational constants: A = ************  B = 1002910.21295  C = 1002910.21295 [MHz]
+  Nuclear repulsion =    0.529177210670000
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DISK_DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is SAD.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     Ag         1       1       0       0       0       0
+     B1g        0       0       0       0       0       0
+     B2g        0       0       0       0       0       0
+     B3g        0       0       0       0       0       0
+     Au         0       0       0       0       0       0
+     B1u        1       1       0       0       0       0
+     B2u        0       0       0       0       0       0
+     B3u        0       0       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  ==> DiskDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    OpenMP threads:              1
+    Integrals threads:           1
+    Memory [MiB]:             7152
+    Algorithm:                Core
+    Integral Cache:           SAVE
+    Schwarz Cutoff:          1E-12
+    Fitting Condition:       1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 5.0351530865E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF.
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-RHF iter SAD:    -0.64350627031919   -6.43506e-01   0.00000e+00 
+   @DF-RHF iter   1:    -1.06613556623701   -4.22629e-01   0.00000e+00 DIIS
+   @DF-RHF iter   2:    -1.06613556623701    0.00000e+00   0.00000e+00 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1Ag    -0.484469  
+
+    Virtual:                                                              
+
+       1B1u    0.457494  
+
+    Final Occupation by Irrep:
+             Ag   B1g   B2g   B3g    Au   B1u   B2u   B3u 
+    DOCC [     1,    0,    0,    0,    0,    0,    0,    0 ]
+
+  @DF-RHF Final Energy:    -1.06613556623701
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.5291772106699998
+    One-Electron Energy =                  -2.2216883593010510
+    Two-Electron Energy =                   0.6263755823940406
+    Total Energy =                         -1.0661355662370107
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:05 2022
+Module time:
+	user time   =       0.20 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       1.46 seconds =       0.02 minutes
+	system time =       0.09 seconds =       0.00 minutes
+	total time  =          3 seconds =       0.05 minutes
+
+  A requested method does not make use of molecular symmetry: further calculations in C1 point group.
+
+  Constructing Basis Sets for FNOCC...
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: RIFIT
+    Keyword: DF_BASIS_CC
+    atoms 1-2 entry H          line    24 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-qzvpp-ri.gbs 
+
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:05 2022
+
+
+
+        *******************************************************
+        *                                                     *
+        *                       DF-CCSD                       *
+        *                 Density-fitted CCSD                 *
+        *                                                     *
+        *                   Eugene DePrince                   *
+        *                                                     *
+        *******************************************************
+
+
+  ==> 3-index integrals <==
+
+  ==> DF Tensor (by Rob Parrish) <==
+
+ => Primary Basis Set <= 
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+ => Auxiliary Basis Set <= 
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-QZVPP-RI
+    Number of shells: 32
+    Number of basis function: 112
+    Number of Cartesian functions: 142
+    Spherical Harmonics?: true
+    Max angular momentum: 4
+
+    Number of auxiliary functions:         112
+
+  ==> Memory <==
+
+        Total memory available:            9536.74 mb
+
+        CCSD memory requirements:             0.01 mb
+            3-index integrals:                0.00 mb
+            CCSD intermediates:               0.00 mb
+
+  ==> Input parameters <==
+
+        Freeze core orbitals?                  no
+        Use frozen natural orbitals?           no
+        r_convergence:                  1.000e-07
+        e_convergence:                  1.000e-06
+        Number of DIIS vectors:                 8
+        Number of frozen core orbitals:         0
+        Number of active occupied orbitals:     1
+        Number of active virtual orbitals:      1
+        Number of frozen virtual orbitals:      0
+
+
+  Begin singles and doubles coupled cluster iterations
+
+   Iter  DIIS          Energy       d(Energy)          |d(T)|     time
+      0   0 1   -0.0205557431   -0.0205557431    0.1044563349        0
+      1   1 1   -0.0292106523   -0.0086549092    0.0439809008        0
+      2   2 1   -0.0327205693   -0.0035099170    0.0178360403        0
+      3   3 1   -0.0351075321   -0.0023869628    0.0071180679        0
+      4   4 1   -0.0348694571    0.0002380750    0.0002087899        0
+      5   5 1   -0.0351530547   -0.0002835976    0.0005233688        0
+      6   6 1   -0.0350413954    0.0001116593    0.0003488215        0
+      7   7 1   -0.0352257774   -0.0001843821    0.0000053671        0
+      8   8 1   -0.0352841202   -0.0000583427    0.0005725467        0
+      9   8 2   -0.0350384995    0.0002456207    0.0007520536        0
+     10   8 3   -0.0350395773   -0.0000010779    0.0000035396        0
+     11   8 4   -0.0350396498   -0.0000000725    0.0000002245        0
+     12   8 5   -0.0350395452    0.0000001046    0.0000000016        1
+
+  CCSD iterations converged!
+
+        T1 diagnostic:                        0.000000000000
+        D1 diagnostic:                        0.000000000000
+
+        OS MP2 correlation energy:           -0.020555743082
+        SS MP2 correlation energy:            0.000000000000
+        MP2 correlation energy:              -0.020555743082
+      * MP2 total energy:                    -1.086691309319
+
+        OS CCSD correlation energy:          -0.035039545217
+        SS CCSD correlation energy:           0.000000000000
+        CCSD correlation energy:             -0.035039545217
+      * CCSD total energy:                   -1.101175111454
+
+  Total time for CCSD iterations:       0.02 s (user)
+                                        0.01 s (system)
+                                           1 s (total)
+
+  Time per iteration:                   0.00 s (user)
+                                        0.00 s (system)
+                                        0.08 s (total)
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:06 2022
+Module time:
+	user time   =       0.04 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       1.66 seconds =       0.03 minutes
+	system time =       0.10 seconds =       0.00 minutes
+	total time  =          4 seconds =       0.07 minutes
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:06 2022
+Module time:
+	user time   =       0.04 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       1.66 seconds =       0.03 minutes
+	system time =       0.10 seconds =       0.00 minutes
+	total time  =          4 seconds =       0.07 minutes
+Molecule: Setting geometry variable R to 1.250000
+    Method 'CCSD' requires SCF_TYPE = DISK_DF, setting.
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:06 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              RHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: d2h
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -0.625000000000     1.007825032230
+         H            0.000000000000     0.000000000000     0.625000000000     1.007825032230
+
+  Running in d2h symmetry.
+
+  Rotational constants: A = ************  B =     21.41023  C =     21.41023 [cm^-1]
+  Rotational constants: A = ************  B = 641862.53629  C = 641862.53629 [MHz]
+  Nuclear repulsion =    0.423341768536000
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DISK_DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is SAD.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     Ag         1       1       0       0       0       0
+     B1g        0       0       0       0       0       0
+     B2g        0       0       0       0       0       0
+     B3g        0       0       0       0       0       0
+     Au         0       0       0       0       0       0
+     B1u        1       1       0       0       0       0
+     B2u        0       0       0       0       0       0
+     B3u        0       0       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  ==> DiskDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    OpenMP threads:              1
+    Integrals threads:           1
+    Memory [MiB]:             7152
+    Algorithm:                Core
+    Integral Cache:           SAVE
+    Schwarz Cutoff:          1E-12
+    Fitting Condition:       1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 6.3752960976E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF.
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-RHF iter SAD:    -0.59474957339094   -5.94750e-01   0.00000e+00 
+   @DF-RHF iter   1:    -0.98916072205151   -3.94411e-01   0.00000e+00 DIIS
+   @DF-RHF iter   2:    -0.98916072205151    0.00000e+00   0.00000e+00 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1Ag    -0.413518  
+
+    Virtual:                                                              
+
+       1B1u    0.320602  
+
+    Final Occupation by Irrep:
+             Ag   B1g   B2g   B3g    Au   B1u   B2u   B3u 
+    DOCC [     1,    0,    0,    0,    0,    0,    0,    0 ]
+
+  @DF-RHF Final Energy:    -0.98916072205151
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.4233417685360000
+    One-Electron Energy =                  -1.9979690918791866
+    Two-Electron Energy =                   0.5854666012916775
+    Total Energy =                         -0.9891607220515092
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:06 2022
+Module time:
+	user time   =       0.20 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       1.87 seconds =       0.03 minutes
+	system time =       0.11 seconds =       0.00 minutes
+	total time  =          4 seconds =       0.07 minutes
+
+  A requested method does not make use of molecular symmetry: further calculations in C1 point group.
+
+  Constructing Basis Sets for FNOCC...
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: RIFIT
+    Keyword: DF_BASIS_CC
+    atoms 1-2 entry H          line    24 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-qzvpp-ri.gbs 
+
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:06 2022
+
+
+
+        *******************************************************
+        *                                                     *
+        *                       DF-CCSD                       *
+        *                 Density-fitted CCSD                 *
+        *                                                     *
+        *                   Eugene DePrince                   *
+        *                                                     *
+        *******************************************************
+
+
+  ==> 3-index integrals <==
+
+  ==> DF Tensor (by Rob Parrish) <==
+
+ => Primary Basis Set <= 
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+ => Auxiliary Basis Set <= 
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-QZVPP-RI
+    Number of shells: 32
+    Number of basis function: 112
+    Number of Cartesian functions: 142
+    Spherical Harmonics?: true
+    Max angular momentum: 4
+
+    Number of auxiliary functions:         112
+
+  ==> Memory <==
+
+        Total memory available:            9536.74 mb
+
+        CCSD memory requirements:             0.01 mb
+            3-index integrals:                0.00 mb
+            CCSD intermediates:               0.00 mb
+
+  ==> Input parameters <==
+
+        Freeze core orbitals?                  no
+        Use frozen natural orbitals?           no
+        r_convergence:                  1.000e-07
+        e_convergence:                  1.000e-06
+        Number of DIIS vectors:                 8
+        Number of frozen core orbitals:         0
+        Number of active occupied orbitals:     1
+        Number of active virtual orbitals:      1
+        Number of frozen virtual orbitals:      0
+
+
+  Begin singles and doubles coupled cluster iterations
+
+   Iter  DIIS          Energy       d(Energy)          |d(T)|     time
+      0   0 1   -0.0309291363   -0.0309291363    0.1451393894        0
+      1   1 1   -0.0455138985   -0.0145847622    0.0684410794        0
+      2   2 1   -0.0519392912   -0.0064253928    0.0301520733        0
+      3   3 1   -0.0566440004   -0.0047047092    0.0128521840        0
+      4   4 1   -0.0567461837   -0.0001021833    0.0000177464        0
+      5   5 1   -0.0567236681    0.0000225156    0.0002625794        0
+      6   6 1   -0.0581403966   -0.0014167286    0.0002008051        0
+      7   7 1   -0.0568254059    0.0013149907    0.0040940773        0
+      8   8 1   -0.0569013993   -0.0000759934    0.0004799605        0
+      9   8 2   -0.0566499114    0.0002514880    0.0006885196        0
+     10   8 3   -0.0566454351    0.0000044762    0.0000015323        0
+     11   8 4   -0.0566505727   -0.0000051376    0.0000138108        0
+     12   8 5   -0.0566491531    0.0000014196    0.0000002819        0
+     13   8 6   -0.0566505540   -0.0000014009    0.0000036123        1
+     14   8 7   -0.0566510306   -0.0000004766    0.0000002305        0
+     15   8 8   -0.0566505045    0.0000005261    0.0000015378        0
+     16   8 1   -0.0566504695    0.0000000350    0.0000000948        0
+
+  CCSD iterations converged!
+
+        T1 diagnostic:                        0.000000000000
+        D1 diagnostic:                        0.000000000000
+
+        OS MP2 correlation energy:           -0.030929136304
+        SS MP2 correlation energy:            0.000000000000
+        MP2 correlation energy:              -0.030929136304
+      * MP2 total energy:                    -1.020089858355
+
+        OS CCSD correlation energy:          -0.056650469545
+        SS CCSD correlation energy:           0.000000000000
+        CCSD correlation energy:             -0.056650469545
+      * CCSD total energy:                   -1.045811191597
+
+  Total time for CCSD iterations:       0.02 s (user)
+                                        0.03 s (system)
+                                           1 s (total)
+
+  Time per iteration:                   0.00 s (user)
+                                        0.00 s (system)
+                                        0.06 s (total)
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:07 2022
+Module time:
+	user time   =       0.04 seconds =       0.00 minutes
+	system time =       0.03 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       2.07 seconds =       0.03 minutes
+	system time =       0.14 seconds =       0.00 minutes
+	total time  =          5 seconds =       0.08 minutes
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:07 2022
+Module time:
+	user time   =       0.04 seconds =       0.00 minutes
+	system time =       0.03 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       2.07 seconds =       0.03 minutes
+	system time =       0.14 seconds =       0.00 minutes
+	total time  =          5 seconds =       0.08 minutes
+Molecule: Setting geometry variable R to 1.500000
+    Method 'CCSD' requires SCF_TYPE = DISK_DF, setting.
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:07 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              RHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: d2h
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -0.750000000000     1.007825032230
+         H            0.000000000000     0.000000000000     0.750000000000     1.007825032230
+
+  Running in d2h symmetry.
+
+  Rotational constants: A = ************  B =     14.86822  C =     14.86822 [cm^-1]
+  Rotational constants: A = ************  B = 445737.87242  C = 445737.87242 [MHz]
+  Nuclear repulsion =    0.352784807113334
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DISK_DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is SAD.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     Ag         1       1       0       0       0       0
+     B1g        0       0       0       0       0       0
+     B2g        0       0       0       0       0       0
+     B3g        0       0       0       0       0       0
+     Au         0       0       0       0       0       0
+     B1u        1       1       0       0       0       0
+     B2u        0       0       0       0       0       0
+     B3u        0       0       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  ==> DiskDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    OpenMP threads:              1
+    Integrals threads:           1
+    Memory [MiB]:             7152
+    Algorithm:                Core
+    Integral Cache:           SAVE
+    Schwarz Cutoff:          1E-12
+    Fitting Condition:       1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 7.4321366392E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF.
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-RHF iter SAD:    -0.56879474175580   -5.68795e-01   0.00000e+00 
+   @DF-RHF iter   1:    -0.91095204286356   -3.42157e-01   0.00000e+00 DIIS
+   @DF-RHF iter   2:    -0.91095204286356    0.00000e+00   0.00000e+00 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1Ag    -0.355556  
+
+    Virtual:                                                              
+
+       1B1u    0.224523  
+
+    Final Occupation by Irrep:
+             Ag   B1g   B2g   B3g    Au   B1u   B2u   B3u 
+    DOCC [     1,    0,    0,    0,    0,    0,    0,    0 ]
+
+  @DF-RHF Final Energy:    -0.91095204286356
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.3527848071133335
+    One-Electron Energy =                  -1.8163617444768134
+    Two-Electron Energy =                   0.5526248944999191
+    Total Energy =                         -0.9109520428635608
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:07 2022
+Module time:
+	user time   =       0.21 seconds =       0.00 minutes
+	system time =       0.00 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       2.29 seconds =       0.04 minutes
+	system time =       0.14 seconds =       0.00 minutes
+	total time  =          5 seconds =       0.08 minutes
+
+  A requested method does not make use of molecular symmetry: further calculations in C1 point group.
+
+  Constructing Basis Sets for FNOCC...
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: RIFIT
+    Keyword: DF_BASIS_CC
+    atoms 1-2 entry H          line    24 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-qzvpp-ri.gbs 
+
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:07 2022
+
+
+
+        *******************************************************
+        *                                                     *
+        *                       DF-CCSD                       *
+        *                 Density-fitted CCSD                 *
+        *                                                     *
+        *                   Eugene DePrince                   *
+        *                                                     *
+        *******************************************************
+
+
+  ==> 3-index integrals <==
+
+  ==> DF Tensor (by Rob Parrish) <==
+
+ => Primary Basis Set <= 
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+ => Auxiliary Basis Set <= 
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-QZVPP-RI
+    Number of shells: 32
+    Number of basis function: 112
+    Number of Cartesian functions: 142
+    Spherical Harmonics?: true
+    Max angular momentum: 4
+
+    Number of auxiliary functions:         112
+
+  ==> Memory <==
+
+        Total memory available:            9536.74 mb
+
+        CCSD memory requirements:             0.01 mb
+            3-index integrals:                0.00 mb
+            CCSD intermediates:               0.00 mb
+
+  ==> Input parameters <==
+
+        Freeze core orbitals?                  no
+        Use frozen natural orbitals?           no
+        r_convergence:                  1.000e-07
+        e_convergence:                  1.000e-06
+        Number of DIIS vectors:                 8
+        Number of frozen core orbitals:         0
+        Number of active occupied orbitals:     1
+        Number of active virtual orbitals:      1
+        Number of frozen virtual orbitals:      0
+
+
+  Begin singles and doubles coupled cluster iterations
+
+   Iter  DIIS          Energy       d(Energy)          |d(T)|     time
+      0   0 1   -0.0454123144   -0.0454123144    0.1978463812        0
+      1   1 1   -0.0688250978   -0.0234127834    0.1020017265        0
+      2   2 1   -0.0795068611   -0.0106817633    0.0465368975        0
+      3   3 1   -0.0871722705   -0.0076654093    0.0198642068        0
+      4   4 1   -0.0877758007   -0.0006035302    0.0001953137        0
+      5   5 1   -0.0881360978   -0.0003602971    0.0013720424        0
+      6   6 1   -0.0870332790    0.0011028188    0.0023090310        0
+      7   7 1   -0.0866998442    0.0003334348    0.0005558842        0
+      8   8 1   -0.0862770967    0.0004227475    0.0014202867        0
+      9   8 2   -0.0872582822   -0.0009811855    0.0025150245        0
+     10   8 3   -0.0872489142    0.0000093680    0.0000278899        1
+     11   8 4   -0.0872467101    0.0000022041    0.0000035769        0
+     12   8 5   -0.0872471986   -0.0000004886    0.0000021434        0
+     13   8 6   -0.0872475028   -0.0000003042    0.0000008755        0
+     14   8 7   -0.0872478829   -0.0000003800    0.0000000860        0
+
+  CCSD iterations converged!
+
+        T1 diagnostic:                        0.000000000000
+        D1 diagnostic:                        0.000000000000
+
+        OS MP2 correlation energy:           -0.045412314394
+        SS MP2 correlation energy:            0.000000000000
+        MP2 correlation energy:              -0.045412314394
+      * MP2 total energy:                    -0.956364357258
+
+        OS CCSD correlation energy:          -0.087247882876
+        SS CCSD correlation energy:           0.000000000000
+        CCSD correlation energy:             -0.087247882876
+      * CCSD total energy:                   -0.998199925740
+
+  Total time for CCSD iterations:       0.02 s (user)
+                                        0.03 s (system)
+                                           1 s (total)
+
+  Time per iteration:                   0.00 s (user)
+                                        0.00 s (system)
+                                        0.07 s (total)
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:08 2022
+Module time:
+	user time   =       0.04 seconds =       0.00 minutes
+	system time =       0.03 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       2.49 seconds =       0.04 minutes
+	system time =       0.17 seconds =       0.00 minutes
+	total time  =          6 seconds =       0.10 minutes
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:08 2022
+Module time:
+	user time   =       0.04 seconds =       0.00 minutes
+	system time =       0.03 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       2.49 seconds =       0.04 minutes
+	system time =       0.17 seconds =       0.00 minutes
+	total time  =          6 seconds =       0.10 minutes
+Molecule: Setting geometry variable R to 2.000000
+    Method 'CCSD' requires SCF_TYPE = DISK_DF, setting.
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:08 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              RHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: d2h
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -1.000000000000     1.007825032230
+         H            0.000000000000     0.000000000000     1.000000000000     1.007825032230
+
+  Running in d2h symmetry.
+
+  Rotational constants: A = ************  B =      8.36337  C =      8.36337 [cm^-1]
+  Rotational constants: A = ************  B = 250727.55324  C = 250727.55324 [MHz]
+  Nuclear repulsion =    0.264588605335000
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DISK_DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is SAD.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     Ag         1       1       0       0       0       0
+     B1g        0       0       0       0       0       0
+     B2g        0       0       0       0       0       0
+     B3g        0       0       0       0       0       0
+     Au         0       0       0       0       0       0
+     B1u        1       1       0       0       0       0
+     B2u        0       0       0       0       0       0
+     B3u        0       0       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  ==> DiskDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    OpenMP threads:              1
+    Integrals threads:           1
+    Memory [MiB]:             7152
+    Algorithm:                Core
+    Integral Cache:           SAVE
+    Schwarz Cutoff:          1E-12
+    Fitting Condition:       1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 8.8078347110E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF.
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-RHF iter SAD:    -0.55036579716165   -5.50366e-01   0.00000e+00 
+   @DF-RHF iter   1:    -0.78390523203329   -2.33539e-01   0.00000e+00 DIIS
+   @DF-RHF iter   2:    -0.78390523203329    0.00000e+00   0.00000e+00 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1Ag    -0.269572  
+
+    Virtual:                                                              
+
+       1B1u    0.108866  
+
+    Final Occupation by Irrep:
+             Ag   B1g   B2g   B3g    Au   B1u   B2u   B3u 
+    DOCC [     1,    0,    0,    0,    0,    0,    0,    0 ]
+
+  @DF-RHF Final Energy:    -0.78390523203329
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.2645886053349999
+    One-Electron Energy =                  -1.5578440717849111
+    Two-Electron Energy =                   0.5093502344166162
+    Total Energy =                         -0.7839052320332950
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:08 2022
+Module time:
+	user time   =       0.20 seconds =       0.00 minutes
+	system time =       0.00 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       2.70 seconds =       0.04 minutes
+	system time =       0.17 seconds =       0.00 minutes
+	total time  =          6 seconds =       0.10 minutes
+
+  A requested method does not make use of molecular symmetry: further calculations in C1 point group.
+
+  Constructing Basis Sets for FNOCC...
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: RIFIT
+    Keyword: DF_BASIS_CC
+    atoms 1-2 entry H          line    24 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-qzvpp-ri.gbs 
+
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:08 2022
+
+
+
+        *******************************************************
+        *                                                     *
+        *                       DF-CCSD                       *
+        *                 Density-fitted CCSD                 *
+        *                                                     *
+        *                   Eugene DePrince                   *
+        *                                                     *
+        *******************************************************
+
+
+  ==> 3-index integrals <==
+
+  ==> DF Tensor (by Rob Parrish) <==
+
+ => Primary Basis Set <= 
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+ => Auxiliary Basis Set <= 
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-QZVPP-RI
+    Number of shells: 32
+    Number of basis function: 112
+    Number of Cartesian functions: 142
+    Spherical Harmonics?: true
+    Max angular momentum: 4
+
+    Number of auxiliary functions:         112
+
+  ==> Memory <==
+
+        Total memory available:            9536.74 mb
+
+        CCSD memory requirements:             0.01 mb
+            3-index integrals:                0.00 mb
+            CCSD intermediates:               0.00 mb
+
+  ==> Input parameters <==
+
+        Freeze core orbitals?                  no
+        Use frozen natural orbitals?           no
+        r_convergence:                  1.000e-07
+        e_convergence:                  1.000e-06
+        Number of DIIS vectors:                 8
+        Number of frozen core orbitals:         0
+        Number of active occupied orbitals:     1
+        Number of active virtual orbitals:      1
+        Number of frozen virtual orbitals:      0
+
+
+  Begin singles and doubles coupled cluster iterations
+
+   Iter  DIIS          Energy       d(Energy)          |d(T)|     time
+      0   0 1   -0.0887218098   -0.0887218098    0.3423757024        0
+      1   1 1   -0.1386205371   -0.0498987273    0.1925581980        0
+      2   2 1   -0.1575456002   -0.0189250631    0.0730314429        0
+      3   3 1   -0.1682318430   -0.0106862428    0.0210577413        0
+      4   4 1   -0.1664215785    0.0018102645    0.0099031322        0
+      5   5 1   -0.1665588987   -0.0001373202    0.0045763936        0
+      6   6 1   -0.1656312508    0.0009276478    0.0049792897        0
+      7   7 1   -0.1661919999   -0.0005607491    0.0022613185        0
+      8   8 1   -0.1655427075    0.0006492924    0.0039032420        0
+      9   8 2   -0.1648215231    0.0007211843    0.0020023486        1
+     10   8 3   -0.1648570668   -0.0000355437    0.0001039789        0
+     11   8 4   -0.1648577529   -0.0000006861    0.0000002925        0
+     12   8 5   -0.1648575385    0.0000002144    0.0000017090        0
+     13   8 6   -0.1648571918    0.0000003466    0.0000010835        0
+     14   8 7   -0.1648580182   -0.0000008263    0.0000000723        0
+
+  CCSD iterations converged!
+
+        T1 diagnostic:                        0.000000000000
+        D1 diagnostic:                        0.000000000000
+
+        OS MP2 correlation energy:           -0.088721809781
+        SS MP2 correlation energy:            0.000000000000
+        MP2 correlation energy:              -0.088721809781
+      * MP2 total energy:                    -0.872627041814
+
+        OS CCSD correlation energy:          -0.164858018166
+        SS CCSD correlation energy:           0.000000000000
+        CCSD correlation energy:             -0.164858018166
+      * CCSD total energy:                   -0.948763250200
+
+  Total time for CCSD iterations:       0.02 s (user)
+                                        0.04 s (system)
+                                           1 s (total)
+
+  Time per iteration:                   0.00 s (user)
+                                        0.00 s (system)
+                                        0.07 s (total)
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:09 2022
+Module time:
+	user time   =       0.03 seconds =       0.00 minutes
+	system time =       0.04 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       2.89 seconds =       0.05 minutes
+	system time =       0.21 seconds =       0.00 minutes
+	total time  =          7 seconds =       0.12 minutes
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:09 2022
+Module time:
+	user time   =       0.03 seconds =       0.00 minutes
+	system time =       0.04 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       2.89 seconds =       0.05 minutes
+	system time =       0.21 seconds =       0.00 minutes
+	total time  =          7 seconds =       0.12 minutes
+Molecule: Setting geometry variable R to 3.000000
+    Method 'CCSD' requires SCF_TYPE = DISK_DF, setting.
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:09 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              RHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: d2h
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -1.500000000000     1.007825032230
+         H            0.000000000000     0.000000000000     1.500000000000     1.007825032230
+
+  Running in d2h symmetry.
+
+  Rotational constants: A = ************  B =      3.71705  C =      3.71705 [cm^-1]
+  Rotational constants: A = ************  B = 111434.46811  C = 111434.46811 [MHz]
+  Nuclear repulsion =    0.176392403556667
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DISK_DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is SAD.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     Ag         1       1       0       0       0       0
+     B1g        0       0       0       0       0       0
+     B2g        0       0       0       0       0       0
+     B3g        0       0       0       0       0       0
+     Au         0       0       0       0       0       0
+     B1u        1       1       0       0       0       0
+     B2u        0       0       0       0       0       0
+     B3u        0       0       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  ==> DiskDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    OpenMP threads:              1
+    Integrals threads:           1
+    Memory [MiB]:             7152
+    Algorithm:                Core
+    Integral Cache:           SAVE
+    Schwarz Cutoff:          1E-12
+    Fitting Condition:       1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 9.8173735574E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF.
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-RHF iter SAD:    -0.54609391563986   -5.46094e-01   0.00000e+00 
+   @DF-RHF iter   1:    -0.65619803104531   -1.10104e-01   0.00000e+00 DIIS
+   @DF-RHF iter   2:    -0.65619803104531    0.00000e+00   0.00000e+00 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1Ag    -0.180689  
+
+    Virtual:                                                              
+
+       1B1u    0.017927  
+
+    Final Occupation by Irrep:
+             Ag   B1g   B2g   B3g    Au   B1u   B2u   B3u 
+    DOCC [     1,    0,    0,    0,    0,    0,    0,    0 ]
+
+  @DF-RHF Final Energy:    -0.65619803104531
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.1763924035566668
+    One-Electron Energy =                  -1.3038028655469933
+    Two-Electron Energy =                   0.4712124309450196
+    Total Energy =                         -0.6561980310453068
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:09 2022
+Module time:
+	user time   =       0.20 seconds =       0.00 minutes
+	system time =       0.00 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       3.10 seconds =       0.05 minutes
+	system time =       0.21 seconds =       0.00 minutes
+	total time  =          7 seconds =       0.12 minutes
+
+  A requested method does not make use of molecular symmetry: further calculations in C1 point group.
+
+  Constructing Basis Sets for FNOCC...
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: RIFIT
+    Keyword: DF_BASIS_CC
+    atoms 1-2 entry H          line    24 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-qzvpp-ri.gbs 
+
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:09 2022
+
+
+
+        *******************************************************
+        *                                                     *
+        *                       DF-CCSD                       *
+        *                 Density-fitted CCSD                 *
+        *                                                     *
+        *                   Eugene DePrince                   *
+        *                                                     *
+        *******************************************************
+
+
+  ==> 3-index integrals <==
+
+  ==> DF Tensor (by Rob Parrish) <==
+
+ => Primary Basis Set <= 
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+ => Auxiliary Basis Set <= 
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-QZVPP-RI
+    Number of shells: 32
+    Number of basis function: 112
+    Number of Cartesian functions: 142
+    Spherical Harmonics?: true
+    Max angular momentum: 4
+
+    Number of auxiliary functions:         112
+
+  ==> Memory <==
+
+        Total memory available:            9536.74 mb
+
+        CCSD memory requirements:             0.01 mb
+            3-index integrals:                0.00 mb
+            CCSD intermediates:               0.00 mb
+
+  ==> Input parameters <==
+
+        Freeze core orbitals?                  no
+        Use frozen natural orbitals?           no
+        r_convergence:                  1.000e-07
+        e_convergence:                  1.000e-06
+        Number of DIIS vectors:                 8
+        Number of frozen core orbitals:         0
+        Number of active occupied orbitals:     1
+        Number of active virtual orbitals:      1
+        Number of frozen virtual orbitals:      0
+
+
+  Begin singles and doubles coupled cluster iterations
+
+   Iter  DIIS          Energy       d(Energy)          |d(T)|     time
+      0   0 1   -0.2253739769   -0.2253739769    0.7532329937        0
+      1   1 1   -0.2973770215   -0.0720030445    0.2406447698        0
+      2   2 1   -0.2664777062    0.0308993153    0.1032700583        0
+      3   3 1   -0.2781908893   -0.0117131831    0.0550030969        0
+      4   4 1   -0.2775804995    0.0006103898    0.0031036404        0
+      5   5 1   -0.2775747972    0.0000057023    0.0000186006        0
+      6   6 1   -0.2773118978    0.0002628993    0.0000101907        0
+      7   7 1   -0.2802350816   -0.0029231838    0.0013369829        0
+      8   8 1   -0.2785881655    0.0016469161    0.0134810783        0
+      9   8 2   -0.2776949578    0.0008932077    0.0051149266        1
+     10   8 3   -0.2775629146    0.0001320432    0.0005966195        0
+     11   8 4   -0.2775802772   -0.0000173626    0.0000701846        0
+     12   8 5   -0.2775765891    0.0000036881    0.0000174779        0
+     13   8 6   -0.2775773459   -0.0000007568    0.0000011432        0
+     14   8 7   -0.2775772987    0.0000000472    0.0000026778        0
+     15   8 8   -0.2775765283    0.0000007704    0.0000024394        0
+     16   8 1   -0.2775768417   -0.0000003135    0.0000014504        0
+     17   8 2   -0.2775768155    0.0000000262    0.0000001322        0
+     18   8 3   -0.2775768155    0.0000000000    0.0000000001        0
+
+  CCSD iterations converged!
+
+        T1 diagnostic:                        0.000000000000
+        D1 diagnostic:                        0.000000000000
+
+        OS MP2 correlation energy:           -0.225373976934
+        SS MP2 correlation energy:            0.000000000000
+        MP2 correlation energy:              -0.225373976934
+      * MP2 total energy:                    -0.881572007979
+
+        OS CCSD correlation energy:          -0.277576815523
+        SS CCSD correlation energy:           0.000000000000
+        CCSD correlation energy:             -0.277576815523
+      * CCSD total energy:                   -0.933774846568
+
+  Total time for CCSD iterations:       0.03 s (user)
+                                        0.04 s (system)
+                                           1 s (total)
+
+  Time per iteration:                   0.00 s (user)
+                                        0.00 s (system)
+                                        0.06 s (total)
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:10 2022
+Module time:
+	user time   =       0.04 seconds =       0.00 minutes
+	system time =       0.04 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       3.30 seconds =       0.06 minutes
+	system time =       0.25 seconds =       0.00 minutes
+	total time  =          8 seconds =       0.13 minutes
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:10 2022
+Module time:
+	user time   =       0.04 seconds =       0.00 minutes
+	system time =       0.04 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       3.30 seconds =       0.06 minutes
+	system time =       0.25 seconds =       0.00 minutes
+	total time  =          8 seconds =       0.13 minutes
+Molecule: Setting geometry variable R to 4.000000
+    Method 'CCSD' requires SCF_TYPE = DISK_DF, setting.
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:10 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              RHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: d2h
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -2.000000000000     1.007825032230
+         H            0.000000000000     0.000000000000     2.000000000000     1.007825032230
+
+  Running in d2h symmetry.
+
+  Rotational constants: A = ************  B =      2.09084  C =      2.09084 [cm^-1]
+  Rotational constants: A = ************  B =  62681.88831  C =  62681.88831 [MHz]
+  Nuclear repulsion =    0.132294302667500
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DISK_DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is SAD.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     Ag         1       1       0       0       0       0
+     B1g        0       0       0       0       0       0
+     B2g        0       0       0       0       0       0
+     B3g        0       0       0       0       0       0
+     Au         0       0       0       0       0       0
+     B1u        1       1       0       0       0       0
+     B2u        0       0       0       0       0       0
+     B3u        0       0       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  ==> DiskDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    OpenMP threads:              1
+    Integrals threads:           1
+    Memory [MiB]:             7152
+    Algorithm:                Core
+    Integral Cache:           SAVE
+    Schwarz Cutoff:          1E-12
+    Fitting Condition:       1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 9.9822985914E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF.
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-RHF iter SAD:    -0.54600860767209   -5.46009e-01   0.00000e+00 
+   @DF-RHF iter   1:    -0.61501787485178   -6.90093e-02   0.00000e+00 DIIS
+   @DF-RHF iter   2:    -0.61501787485178    0.00000e+00   0.00000e+00 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1Ag    -0.147327  
+
+    Virtual:                                                              
+
+       1B1u   -0.012166  
+
+    Final Occupation by Irrep:
+             Ag   B1g   B2g   B3g    Au   B1u   B2u   B3u 
+    DOCC [     1,    0,    0,    0,    0,    0,    0,    0 ]
+
+  @DF-RHF Final Energy:    -0.61501787485178
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.1322943026674999
+    One-Electron Energy =                  -1.1999707951658622
+    Two-Electron Energy =                   0.4526586176465827
+    Total Energy =                         -0.6150178748517797
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:10 2022
+Module time:
+	user time   =       0.21 seconds =       0.00 minutes
+	system time =       0.00 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       3.51 seconds =       0.06 minutes
+	system time =       0.25 seconds =       0.00 minutes
+	total time  =          8 seconds =       0.13 minutes
+
+  A requested method does not make use of molecular symmetry: further calculations in C1 point group.
+
+  Constructing Basis Sets for FNOCC...
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: RIFIT
+    Keyword: DF_BASIS_CC
+    atoms 1-2 entry H          line    24 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-qzvpp-ri.gbs 
+
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:10 2022
+
+
+
+        *******************************************************
+        *                                                     *
+        *                       DF-CCSD                       *
+        *                 Density-fitted CCSD                 *
+        *                                                     *
+        *                   Eugene DePrince                   *
+        *                                                     *
+        *******************************************************
+
+
+  ==> 3-index integrals <==
+
+  ==> DF Tensor (by Rob Parrish) <==
+
+ => Primary Basis Set <= 
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+ => Auxiliary Basis Set <= 
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-QZVPP-RI
+    Number of shells: 32
+    Number of basis function: 112
+    Number of Cartesian functions: 142
+    Spherical Harmonics?: true
+    Max angular momentum: 4
+
+    Number of auxiliary functions:         112
+
+  ==> Memory <==
+
+        Total memory available:            9536.74 mb
+
+        CCSD memory requirements:             0.01 mb
+            3-index integrals:                0.00 mb
+            CCSD intermediates:               0.00 mb
+
+  ==> Input parameters <==
+
+        Freeze core orbitals?                  no
+        Use frozen natural orbitals?           no
+        r_convergence:                  1.000e-07
+        e_convergence:                  1.000e-06
+        Number of DIIS vectors:                 8
+        Number of frozen core orbitals:         0
+        Number of active occupied orbitals:     1
+        Number of active virtual orbitals:      1
+        Number of frozen virtual orbitals:      0
+
+
+  Begin singles and doubles coupled cluster iterations
+
+   Iter  DIIS          Energy       d(Energy)          |d(T)|     time
+      0   0 1   -0.3815468913   -0.3815468913    1.1880490830        0
+      1   1 1   -0.2164560522    0.1650908391    0.5140548238        0
+      2   2 1   -0.4200834624   -0.2036274101    0.6340488243        0
+      3   3 1   -0.2916830444    0.1284004180    0.8724418160        0
+      4   4 1   -0.2975119318   -0.0058288874    0.1887613450        1
+      5   5 1   -0.2831233968    0.0143885349    0.1488164574        0
+      6   6 1   -0.3140738265   -0.0309504297    0.2460012433        0
+      7   7 1   -0.3174766483   -0.0034028218    0.0310475894        0
+      8   8 1   -0.3177586628   -0.0002820145    0.0060681459        0
+      9   8 2   -0.3180936023   -0.0003349395    0.0039859631        0
+     10   8 3   -0.3183014837   -0.0002078814    0.0015106418        0
+     11   8 4   -0.3183411020   -0.0000396183    0.0000269751        0
+     12   8 5   -0.3183101133    0.0000309887    0.0003201292        0
+     13   8 6   -0.3183295783   -0.0000194650    0.0000908266        0
+     14   8 7   -0.3183084458    0.0000211325    0.0002348561        0
+     15   8 8   -0.3182977149    0.0000107309    0.0000784880        0
+     16   8 1   -0.3182968692    0.0000008457    0.0000009104        0
+     17   8 2   -0.3182978380   -0.0000009688    0.0000071675        0
+     18   8 3   -0.3182978379    0.0000000001    0.0000000008        0
+
+  CCSD iterations converged!
+
+        T1 diagnostic:                        0.000000000000
+        D1 diagnostic:                        0.000000000000
+
+        OS MP2 correlation energy:           -0.381546891308
+        SS MP2 correlation energy:            0.000000000000
+        MP2 correlation energy:              -0.381546891308
+      * MP2 total energy:                    -0.996564766160
+
+        OS CCSD correlation energy:          -0.318297837902
+        SS CCSD correlation energy:           0.000000000000
+        CCSD correlation energy:             -0.318297837902
+      * CCSD total energy:                   -0.933315712754
+
+  Total time for CCSD iterations:       0.02 s (user)
+                                        0.03 s (system)
+                                           1 s (total)
+
+  Time per iteration:                   0.00 s (user)
+                                        0.00 s (system)
+                                        0.06 s (total)
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:11 2022
+Module time:
+	user time   =       0.04 seconds =       0.00 minutes
+	system time =       0.03 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       3.71 seconds =       0.06 minutes
+	system time =       0.28 seconds =       0.00 minutes
+	total time  =          9 seconds =       0.15 minutes
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:11 2022
+Module time:
+	user time   =       0.04 seconds =       0.00 minutes
+	system time =       0.03 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       3.71 seconds =       0.06 minutes
+	system time =       0.28 seconds =       0.00 minutes
+	total time  =          9 seconds =       0.15 minutes
+Table of Results 
+         R         E(CCSD)
+      0.25   -0.3123036708
+       0.5   -1.0551882305
+      0.75   -1.1371446356
+         1   -1.1011751115
+      1.25   -1.0458111916
+       1.5   -0.9981999257
+         2   -0.9487632502
+         3   -0.9337748466
+         4   -0.9333157128
+
+    Psi4 stopped on: Tuesday, 17 May 2022 04:41PM
+    Psi4 wall time for execution: 0:00:09.05
+
+*** Psi4 exiting successfully. Buy a developer a beer!

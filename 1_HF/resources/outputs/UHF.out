@@ -1,0 +1,1941 @@
+
+    -----------------------------------------------------------------------
+          Psi4: An Open-Source Ab Initio Electronic Structure Package
+                               Psi4 1.3.2 release
+
+                         Git: Rev {} zzzzzzz 
+
+
+    R. M. Parrish, L. A. Burns, D. G. A. Smith, A. C. Simmonett,
+    A. E. DePrince III, E. G. Hohenstein, U. Bozkaya, A. Yu. Sokolov,
+    R. Di Remigio, R. M. Richard, J. F. Gonthier, A. M. James,
+    H. R. McAlexander, A. Kumar, M. Saitow, X. Wang, B. P. Pritchard,
+    P. Verma, H. F. Schaefer III, K. Patkowski, R. A. King, E. F. Valeev,
+    F. A. Evangelista, J. M. Turney, T. D. Crawford, and C. D. Sherrill,
+    J. Chem. Theory Comput. 13(7) pp 3185--3197 (2017).
+    (doi: 10.1021/acs.jctc.7b00174)
+
+
+                         Additional Contributions by
+    P. Kraus, H. Kruse, M. H. Lechner, M. C. Schieber, R. A. Shaw,
+    A. Alenaizan, R. Galvelis, Z. L. Glick, S. Lehtola, and J. P. Misiewicz
+
+    -----------------------------------------------------------------------
+
+
+    Psi4 started on: Tuesday, 17 May 2022 04:41PM
+
+    Process ID: 56359
+    Host:       atl1-1-02-012-10-l.pace.gatech.edu
+    PSIDATADIR: /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4
+    Memory:     500.0 MiB
+    Threads:    1
+    
+  ==> Input File <==
+
+--------------------------------------------------------------------------
+# PSI4 file for H2 UHF energy
+
+memory 10 GB
+
+molecule mol {
+0 1
+H 
+H 1 R
+symmetry c1
+}
+
+Rvals = [.25,.5,.75,1,1.25,1.5,2,3,4]
+
+table = Table(rows=["R"], cols=["E(UHF)"])
+
+set {
+  scf_type df
+  mp2_type df
+  cc_type df
+  freeze_core true
+  reference uhf
+  guess_mix True
+  guess gwh
+}
+
+for R in Rvals:
+    mol.R = R
+    euhf = energy('hf/sto-3g')
+    table[R] = [euhf]
+
+print_out('Table of Results \n')
+print_out(str(table))
+
+--------------------------------------------------------------------------
+
+  Memory set to   9.313 GiB by Python driver.
+Molecule: geometry: Molecule is not complete, please use 'update_geometry'
+                    once all variables are set.
+Molecule: Setting geometry variable R to 0.250000
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:01 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              UHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -0.125000000000     1.007825032230
+         H            0.000000000000     0.000000000000     0.125000000000     1.007825032230
+
+  Running in c1 symmetry.
+
+  Rotational constants: A = ************  B =    535.25574  C =    535.25574 [cm^-1]
+  Rotational constants: A = ************  B = 16046563.40727  C = 16046563.40727 [MHz]
+  Nuclear repulsion =    2.116708842680000
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is GWH.
+  Energy threshold   = 1.00e-06
+  Density threshold  = 1.00e-06
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     A          2       2       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.000 GiB; user supplied 6.985 GiB. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory [MiB]:              7152
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 5.3438352523E-02.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Generalized Wolfsberg-Helmholtz.
+
+  Mixing alpha HOMO/LUMO orbitals (1,2)
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-UHF iter   1:     1.26279340463172    1.26279e+00   6.14904e-01 DIIS
+   @DF-UHF iter   2:    -0.14419612874118   -1.40699e+00   2.34919e-01 DIIS
+   @DF-UHF iter   3:    -0.30352113575160   -1.59325e-01   2.29906e-02 DIIS
+   @DF-UHF iter   4:    -0.30503155796871   -1.51042e-03   1.15605e-03 DIIS
+   @DF-UHF iter   5:    -0.30503538220588   -3.82424e-06   3.70365e-05 DIIS
+   @DF-UHF iter   6:    -0.30503538613289   -3.92701e-09   8.60236e-07 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+   @Spin Contamination Metric:   1.776356839E-15
+   @S^2 Expected:                0.000000000E+00
+   @S^2 Observed:                1.776356839E-15
+   @S   Expected:                0.000000000E+00
+   @S   Observed:                0.000000000E+00
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Alpha Occupied:                                                       
+
+       1A     -0.831640  
+
+    Alpha Virtual:                                                        
+
+       2A      1.473076  
+
+    Beta Occupied:                                                        
+
+       1A     -0.831640  
+
+    Beta Virtual:                                                         
+
+       2A      1.473076  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     1 ]
+    SOCC [     0 ]
+
+  @DF-UHF Final Energy:    -0.30503538613289
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              2.1167088426800000
+    One-Electron Energy =                  -3.1802084936133870
+    Two-Electron Energy =                   0.7584642648004950
+    Total Energy =                         -0.3050353861328919
+
+  UHF NO Occupations:
+  HONO-0 :    1  A 2.0000000
+  LUNO+0 :    2  A 0.0000000
+
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:    -0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:    -0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:    -0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:    -0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:02 2022
+Module time:
+	user time   =       0.14 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       0.14 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Molecule: Setting geometry variable R to 0.500000
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:02 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              UHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -0.250000000000     1.007825032230
+         H            0.000000000000     0.000000000000     0.250000000000     1.007825032230
+
+  Running in c1 symmetry.
+
+  Rotational constants: A = ************  B =    133.81394  C =    133.81394 [cm^-1]
+  Rotational constants: A = ************  B = 4011640.85182  C = 4011640.85182 [MHz]
+  Nuclear repulsion =    1.058354421340000
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is GWH.
+  Energy threshold   = 1.00e-06
+  Density threshold  = 1.00e-06
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     A          2       2       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.000 GiB; user supplied 6.985 GiB. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory [MiB]:              7152
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 1.8528190617E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Generalized Wolfsberg-Helmholtz.
+
+  Mixing alpha HOMO/LUMO orbitals (1,2)
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-UHF iter   1:    -0.05901102206753   -5.90110e-02   4.11731e-01 DIIS
+   @DF-UHF iter   2:    -0.87440953869278   -8.15399e-01   1.86151e-01 DIIS
+   @DF-UHF iter   3:    -1.03687586726801   -1.62466e-01   3.51616e-02 DIIS
+   @DF-UHF iter   4:    -1.04292651415833   -6.05065e-03   4.39739e-03 DIIS
+   @DF-UHF iter   5:    -1.04302210841452   -9.55943e-05   3.67148e-04 DIIS
+   @DF-UHF iter   6:    -1.04302277716742   -6.68753e-07   2.15947e-05 DIIS
+   @DF-UHF iter   7:    -1.04302277948430   -2.31688e-09   9.71693e-07 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+   @Spin Contamination Metric:   1.576516695E-14
+   @S^2 Expected:                0.000000000E+00
+   @S^2 Observed:                1.576516695E-14
+   @S   Expected:                0.000000000E+00
+   @S   Observed:                0.000000000E+00
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Alpha Occupied:                                                       
+
+       1A     -0.690849  
+
+    Alpha Virtual:                                                        
+
+       2A      0.988451  
+
+    Beta Occupied:                                                        
+
+       1A     -0.690849  
+
+    Beta Virtual:                                                         
+
+       2A      0.988451  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     1 ]
+    SOCC [     0 ]
+
+  @DF-UHF Final Energy:    -1.04302277948430
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              1.0583544213400000
+    One-Electron Energy =                  -2.8210567350984022
+    Two-Electron Energy =                   0.7196795342741020
+    Total Energy =                         -1.0430227794843001
+
+  UHF NO Occupations:
+  HONO-0 :    1  A 2.0000000
+  LUNO+0 :    2  A 0.0000000
+
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:    -0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:02 2022
+Module time:
+	user time   =       0.11 seconds =       0.00 minutes
+	system time =       0.00 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       0.26 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Molecule: Setting geometry variable R to 0.750000
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:02 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              UHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -0.375000000000     1.007825032230
+         H            0.000000000000     0.000000000000     0.375000000000     1.007825032230
+
+  Running in c1 symmetry.
+
+  Rotational constants: A = ************  B =     59.47286  C =     59.47286 [cm^-1]
+  Rotational constants: A = ************  B = 1782951.48970  C = 1782951.48970 [MHz]
+  Nuclear repulsion =    0.705569614226667
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is GWH.
+  Energy threshold   = 1.00e-06
+  Density threshold  = 1.00e-06
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     A          2       2       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.000 GiB; user supplied 6.985 GiB. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory [MiB]:              7152
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 3.4666620404E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Generalized Wolfsberg-Helmholtz.
+
+  Mixing alpha HOMO/LUMO orbitals (1,2)
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-UHF iter   1:    -0.53204597909508   -5.32046e-01   2.74564e-01 DIIS
+   @DF-UHF iter   2:    -0.96975003901254   -4.37704e-01   1.34183e-01 DIIS
+   @DF-UHF iter   3:    -1.09991399998754   -1.30164e-01   4.06706e-02 DIIS
+   @DF-UHF iter   4:    -1.11463660323344   -1.47226e-02   1.22984e-02 DIIS
+   @DF-UHF iter   5:    -1.11607552447304   -1.43892e-03   3.12742e-03 DIIS
+   @DF-UHF iter   6:    -1.11617168469161   -9.61602e-05   6.02048e-04 DIIS
+   @DF-UHF iter   7:    -1.11617531168217   -3.62699e-06   8.54907e-05 DIIS
+   @DF-UHF iter   8:    -1.11617538544128   -7.37591e-08   9.28739e-06 DIIS
+   @DF-UHF iter   9:    -1.11617538631536   -8.74083e-10   8.16429e-07 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+   @Spin Contamination Metric:   1.922906279E-13
+   @S^2 Expected:                0.000000000E+00
+   @S^2 Observed:                1.922906279E-13
+   @S   Expected:                0.000000000E+00
+   @S   Observed:                0.000000000E+00
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Alpha Occupied:                                                       
+
+       1A     -0.574461  
+
+    Alpha Virtual:                                                        
+
+       2A      0.660725  
+
+    Beta Occupied:                                                        
+
+       1A     -0.574461  
+
+    Beta Virtual:                                                         
+
+       2A      0.660725  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     1 ]
+    SOCC [     0 ]
+
+  @DF-UHF Final Energy:    -1.11617538631536
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.7055696142266670
+    One-Electron Energy =                  -2.4945690100085303
+    Two-Electron Energy =                   0.6728240094665031
+    Total Energy =                         -1.1161753863153603
+
+  UHF NO Occupations:
+  HONO-0 :    1  A 2.0000000
+  LUNO+0 :    2  A 0.0000000
+
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:02 2022
+Module time:
+	user time   =       0.10 seconds =       0.00 minutes
+	system time =       0.00 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       0.37 seconds =       0.01 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Molecule: Setting geometry variable R to 1.000000
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:02 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              UHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -0.500000000000     1.007825032230
+         H            0.000000000000     0.000000000000     0.500000000000     1.007825032230
+
+  Running in c1 symmetry.
+
+  Rotational constants: A = ************  B =     33.45348  C =     33.45348 [cm^-1]
+  Rotational constants: A = ************  B = 1002910.21295  C = 1002910.21295 [MHz]
+  Nuclear repulsion =    0.529177210670000
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is GWH.
+  Energy threshold   = 1.00e-06
+  Density threshold  = 1.00e-06
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     A          2       2       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.000 GiB; user supplied 6.985 GiB. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory [MiB]:              7152
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 5.0351530865E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Generalized Wolfsberg-Helmholtz.
+
+  Mixing alpha HOMO/LUMO orbitals (1,2)
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-UHF iter   1:    -0.73708587378175   -7.37086e-01   1.88942e-01 DIIS
+   @DF-UHF iter   2:    -0.96790237219818   -2.30816e-01   9.17130e-02 DIIS
+   @DF-UHF iter   3:    -1.04581423441588   -7.79119e-02   3.16580e-02 DIIS
+   @DF-UHF iter   4:    -1.05962299068409   -1.38088e-02   1.56634e-02 DIIS
+   @DF-UHF iter   5:    -1.06367342545052   -4.05043e-03   9.09511e-03 DIIS
+   @DF-UHF iter   6:    -1.06518548776111   -1.51206e-03   5.51164e-03 DIIS
+   @DF-UHF iter   7:    -1.06579438806591   -6.08900e-04   3.26804e-03 DIIS
+   @DF-UHF iter   8:    -1.06603049500902   -2.36107e-04   1.80595e-03 DIIS
+   @DF-UHF iter   9:    -1.06611012115170   -7.96261e-05   8.87448e-04 DIIS
+   @DF-UHF iter  10:    -1.06613114712651   -2.10260e-05   3.69694e-04 DIIS
+   @DF-UHF iter  11:    -1.06613505871205   -3.91159e-06   1.25278e-04 DIIS
+   @DF-UHF iter  12:    -1.06613554954704   -4.90835e-07   2.27179e-05 DIIS
+   @DF-UHF iter  13:    -1.06613556615563   -1.66086e-08   1.58626e-06 DIIS
+   @DF-UHF iter  14:    -1.06613556623695   -8.13187e-11   4.00656e-08 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+   @Spin Contamination Metric:   1.110223025E-15
+   @S^2 Expected:                0.000000000E+00
+   @S^2 Observed:                1.110223025E-15
+   @S   Expected:                0.000000000E+00
+   @S   Observed:                0.000000000E+00
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Alpha Occupied:                                                       
+
+       1A     -0.484469  
+
+    Alpha Virtual:                                                        
+
+       2A      0.457494  
+
+    Beta Occupied:                                                        
+
+       1A     -0.484469  
+
+    Beta Virtual:                                                         
+
+       2A      0.457494  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     1 ]
+    SOCC [     0 ]
+
+  @DF-UHF Final Energy:    -1.06613556623695
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.5291772106700000
+    One-Electron Energy =                  -2.2216883593008312
+    Two-Electron Energy =                   0.6263755823938795
+    Total Energy =                         -1.0661355662369518
+
+  UHF NO Occupations:
+  HONO-0 :    1  A 2.0000000
+  LUNO+0 :    2  A 0.0000000
+
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:    -0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:    -0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:    -0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:    -0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:02 2022
+Module time:
+	user time   =       0.11 seconds =       0.00 minutes
+	system time =       0.00 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       0.49 seconds =       0.01 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Molecule: Setting geometry variable R to 1.250000
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:02 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              UHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -0.625000000000     1.007825032230
+         H            0.000000000000     0.000000000000     0.625000000000     1.007825032230
+
+  Running in c1 symmetry.
+
+  Rotational constants: A = ************  B =     21.41023  C =     21.41023 [cm^-1]
+  Rotational constants: A = ************  B = 641862.53629  C = 641862.53629 [MHz]
+  Nuclear repulsion =    0.423341768536000
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is GWH.
+  Energy threshold   = 1.00e-06
+  Density threshold  = 1.00e-06
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     A          2       2       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.000 GiB; user supplied 6.985 GiB. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory [MiB]:              7152
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 6.3752960976E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Generalized Wolfsberg-Helmholtz.
+
+  Mixing alpha HOMO/LUMO orbitals (1,2)
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-UHF iter   1:    -0.83643105543890   -8.36431e-01   1.31485e-01 DIIS
+   @DF-UHF iter   2:    -0.95421078342296   -1.17780e-01   6.00323e-02 DIIS
+   @DF-UHF iter   3:    -0.98945243458319   -3.52417e-02   1.62511e-02 DIIS
+   @DF-UHF iter   4:    -0.99319038434099   -3.73795e-03   6.55745e-03 DIIS
+   @DF-UHF iter   5:    -0.99392172786089   -7.31344e-04   3.18736e-03 DIIS
+   @DF-UHF iter   6:    -0.99411491529895   -1.93187e-04   1.65875e-03 DIIS
+   @DF-UHF iter   7:    -0.99417219925867   -5.72840e-05   8.68091e-04 DIIS
+   @DF-UHF iter   8:    -0.99418925846947   -1.70592e-05   4.38044e-04 DIIS
+   @DF-UHF iter   9:    -0.99419395644223   -4.69797e-06   2.05862e-04 DIIS
+   @DF-UHF iter  10:    -0.99419506976564   -1.11332e-06   8.72887e-05 DIIS
+   @DF-UHF iter  11:    -0.99419528212415   -2.12359e-07   3.24616e-05 DIIS
+   @DF-UHF iter  12:    -0.99419531438031   -3.22562e-08   7.81043e-06 DIIS
+   @DF-UHF iter  13:    -0.99419531633450   -1.95418e-09   9.86799e-07 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+   @Spin Contamination Metric:   2.801581121E-01
+   @S^2 Expected:                0.000000000E+00
+   @S^2 Observed:                2.801581121E-01
+   @S   Expected:                0.000000000E+00
+   @S   Observed:                0.000000000E+00
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Alpha Occupied:                                                       
+
+       1A     -0.445629  
+
+    Alpha Virtual:                                                        
+
+       2A      0.354927  
+
+    Beta Occupied:                                                        
+
+       1A     -0.445629  
+
+    Beta Virtual:                                                         
+
+       2A      0.354927  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     1 ]
+    SOCC [     0 ]
+
+  @DF-UHF Final Energy:    -0.99419531633450
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.4233417685360000
+    One-Electron Energy =                  -1.9438117005093409
+    Two-Electron Energy =                   0.5262746156388445
+    Total Energy =                         -0.9941953163344965
+
+  UHF NO Occupations:
+  HONO-0 :    1  A 1.8484350
+  LUNO+0 :    2  A 0.1515650
+
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:02 2022
+Module time:
+	user time   =       0.10 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       0.60 seconds =       0.01 minutes
+	system time =       0.02 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Molecule: Setting geometry variable R to 1.500000
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:02 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              UHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -0.750000000000     1.007825032230
+         H            0.000000000000     0.000000000000     0.750000000000     1.007825032230
+
+  Running in c1 symmetry.
+
+  Rotational constants: A = ************  B =     14.86822  C =     14.86822 [cm^-1]
+  Rotational constants: A = ************  B = 445737.87242  C = 445737.87242 [MHz]
+  Nuclear repulsion =    0.352784807113333
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is GWH.
+  Energy threshold   = 1.00e-06
+  Density threshold  = 1.00e-06
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     A          2       2       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.000 GiB; user supplied 6.985 GiB. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory [MiB]:              7152
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 7.4321366392E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Generalized Wolfsberg-Helmholtz.
+
+  Mixing alpha HOMO/LUMO orbitals (1,2)
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-UHF iter   1:    -0.88644285423059   -8.86443e-01   9.12005e-02 DIIS
+   @DF-UHF iter   2:    -0.94405893703349   -5.76161e-02   3.79299e-02 DIIS
+   @DF-UHF iter   3:    -0.95730056338036   -1.32416e-02   5.88371e-03 DIIS
+   @DF-UHF iter   4:    -0.95768782632662   -3.87263e-04   1.07778e-03 DIIS
+   @DF-UHF iter   5:    -0.95770158541706   -1.37591e-05   1.78331e-04 DIIS
+   @DF-UHF iter   6:    -0.95770196998735   -3.84570e-07   2.34676e-05 DIIS
+   @DF-UHF iter   7:    -0.95770197670639   -6.71904e-09   2.39027e-06 DIIS
+   @DF-UHF iter   8:    -0.95770197677638   -6.99903e-11   1.93748e-07 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+   @Spin Contamination Metric:   6.947498359E-01
+   @S^2 Expected:                0.000000000E+00
+   @S^2 Observed:                6.947498359E-01
+   @S   Expected:                0.000000000E+00
+   @S   Observed:                0.000000000E+00
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Alpha Occupied:                                                       
+
+       1A     -0.456643  
+
+    Alpha Virtual:                                                        
+
+       2A      0.332372  
+
+    Beta Occupied:                                                        
+
+       1A     -0.456643  
+
+    Beta Virtual:                                                         
+
+       2A      0.332372  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     1 ]
+    SOCC [     0 ]
+
+  @DF-UHF Final Energy:    -0.95770197677638
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.3527848071133335
+    One-Electron Energy =                  -1.7076874264417241
+    Two-Electron Energy =                   0.3972006425520139
+    Total Energy =                         -0.9577019767763767
+
+  UHF NO Occupations:
+  HONO-0 :    1  A 1.5524945
+  LUNO+0 :    2  A 0.4475055
+
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:02 2022
+Module time:
+	user time   =       0.10 seconds =       0.00 minutes
+	system time =       0.00 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       0.71 seconds =       0.01 minutes
+	system time =       0.02 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Molecule: Setting geometry variable R to 2.000000
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:02 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              UHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -1.000000000000     1.007825032230
+         H            0.000000000000     0.000000000000     1.000000000000     1.007825032230
+
+  Running in c1 symmetry.
+
+  Rotational constants: A = ************  B =      8.36337  C =      8.36337 [cm^-1]
+  Rotational constants: A = ************  B = 250727.55324  C = 250727.55324 [MHz]
+  Nuclear repulsion =    0.264588605335000
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is GWH.
+  Energy threshold   = 1.00e-06
+  Density threshold  = 1.00e-06
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     A          2       2       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.000 GiB; user supplied 6.985 GiB. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory [MiB]:              7152
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 8.8078347110E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Generalized Wolfsberg-Helmholtz.
+
+  Mixing alpha HOMO/LUMO orbitals (1,2)
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-UHF iter   1:    -0.92312400553005   -9.23124e-01   4.28485e-02 DIIS
+   @DF-UHF iter   2:    -0.93560806025153   -1.24841e-02   1.43354e-02 DIIS
+   @DF-UHF iter   3:    -0.93722290762837   -1.61485e-03   4.62072e-04 DIIS
+   @DF-UHF iter   4:    -0.93722463790540   -1.73028e-06   1.21590e-05 DIIS
+   @DF-UHF iter   5:    -0.93722463910540   -1.20000e-09   2.21564e-07 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+   @Spin Contamination Metric:   9.458527148E-01
+   @S^2 Expected:                0.000000000E+00
+   @S^2 Observed:                9.458527148E-01
+   @S   Expected:                0.000000000E+00
+   @S   Observed:                0.000000000E+00
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Alpha Occupied:                                                       
+
+       1A     -0.464577  
+
+    Alpha Virtual:                                                        
+
+       2A      0.313492  
+
+    Beta Occupied:                                                        
+
+       1A     -0.464577  
+
+    Beta Virtual:                                                         
+
+       2A      0.313492  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     1 ]
+    SOCC [     0 ]
+
+  @DF-UHF Final Energy:    -0.93722463910540
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.2645886053350000
+    One-Electron Energy =                  -1.4744722102596584
+    Two-Electron Energy =                   0.2726589658192602
+    Total Energy =                         -0.9372246391053982
+
+  UHF NO Occupations:
+  HONO-0 :    1  A 1.2326957
+  LUNO+0 :    2  A 0.7673043
+
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:    -0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:03 2022
+Module time:
+	user time   =       0.10 seconds =       0.00 minutes
+	system time =       0.00 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       0.81 seconds =       0.01 minutes
+	system time =       0.02 seconds =       0.00 minutes
+	total time  =          2 seconds =       0.03 minutes
+Molecule: Setting geometry variable R to 3.000000
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:03 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              UHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -1.500000000000     1.007825032230
+         H            0.000000000000     0.000000000000     1.500000000000     1.007825032230
+
+  Running in c1 symmetry.
+
+  Rotational constants: A = ************  B =      3.71705  C =      3.71705 [cm^-1]
+  Rotational constants: A = ************  B = 111434.46811  C = 111434.46811 [MHz]
+  Nuclear repulsion =    0.176392403556667
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is GWH.
+  Energy threshold   = 1.00e-06
+  Density threshold  = 1.00e-06
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     A          2       2       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.000 GiB; user supplied 6.985 GiB. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory [MiB]:              7152
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 9.8173735574E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Generalized Wolfsberg-Helmholtz.
+
+  Mixing alpha HOMO/LUMO orbitals (1,2)
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-UHF iter   1:    -0.93286336402089   -9.32863e-01   7.94482e-03 DIIS
+   @DF-UHF iter   2:    -0.93326348421696   -4.00120e-04   1.80891e-03 DIIS
+   @DF-UHF iter   3:    -0.93328537989219   -2.18957e-05   1.49984e-06 DIIS
+   @DF-UHF iter   4:    -0.93328537990725   -1.50618e-11   8.19770e-10 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+   @Spin Contamination Metric:   9.985892206E-01
+   @S^2 Expected:                0.000000000E+00
+   @S^2 Observed:                9.985892206E-01
+   @S   Expected:                0.000000000E+00
+   @S   Observed:                0.000000000E+00
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Alpha Occupied:                                                       
+
+       1A     -0.466528  
+
+    Alpha Virtual:                                                        
+
+       2A      0.307890  
+
+    Beta Occupied:                                                        
+
+       1A     -0.466528  
+
+    Beta Virtual:                                                         
+
+       2A      0.307890  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     1 ]
+    SOCC [     0 ]
+
+  @DF-UHF Final Energy:    -0.93328537990725
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.1763924035566667
+    One-Electron Energy =                  -1.2862992465417913
+    Two-Electron Energy =                   0.1766214630778737
+    Total Energy =                         -0.9332853799072507
+
+  UHF NO Occupations:
+  HONO-0 :    1  A 1.0375603
+  LUNO+0 :    2  A 0.9624397
+
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:03 2022
+Module time:
+	user time   =       0.10 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       0.91 seconds =       0.02 minutes
+	system time =       0.03 seconds =       0.00 minutes
+	total time  =          2 seconds =       0.03 minutes
+Molecule: Setting geometry variable R to 4.000000
+
+*** tstart() called on atl1-1-02-012-10-l.pace.gatech.edu
+*** at Tue May 17 16:41:03 2022
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/sto-3g.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              UHF Reference
+                        1 Threads,   9536 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -2.000000000000     1.007825032230
+         H            0.000000000000     0.000000000000     2.000000000000     1.007825032230
+
+  Running in c1 symmetry.
+
+  Rotational constants: A = ************  B =      2.09084  C =      2.09084 [cm^-1]
+  Rotational constants: A = ************  B =  62681.88831  C =  62681.88831 [MHz]
+  Nuclear repulsion =    0.132294302667500
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is GWH.
+  Energy threshold   = 1.00e-06
+  Density threshold  = 1.00e-06
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+   => Loading Basis Set <=
+
+    Name: (STO-3G AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry H          line    23 file /usr/local/pace-apps/manual/packages/psi4/1.3.2/intel-19.0.5/share/psi4/basis/def2-svp-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     A          2       2       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.000 GiB; user supplied 6.985 GiB. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory [MiB]:              7152
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (STO-3G AUX)
+    Blend: DEF2-SVP-JKFIT
+    Number of shells: 12
+    Number of basis function: 36
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  Minimum eigenvalue in the overlap matrix is 9.9822985914E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Generalized Wolfsberg-Helmholtz.
+
+  Mixing alpha HOMO/LUMO orbitals (1,2)
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-UHF iter   1:    -0.93315978868792   -9.33160e-01   1.01427e-03 DIIS
+   @DF-UHF iter   2:    -0.93316601104820   -6.22236e-06   1.73294e-04 DIIS
+   @DF-UHF iter   3:    -0.93316619815151   -1.87103e-07   1.97511e-09 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+   @Spin Contamination Metric:   9.999800335E-01
+   @S^2 Expected:                0.000000000E+00
+   @S^2 Observed:                9.999800335E-01
+   @S   Expected:                0.000000000E+00
+   @S   Observed:                0.000000000E+00
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Alpha Occupied:                                                       
+
+       1A     -0.466581  
+
+    Alpha Virtual:                                                        
+
+       2A      0.307732  
+
+    Beta Occupied:                                                        
+
+       1A     -0.466581  
+
+    Beta Virtual:                                                         
+
+       2A      0.307732  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     1 ]
+    SOCC [     0 ]
+
+  @DF-UHF Final Energy:    -0.93316619815151
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.1322943026675000
+    One-Electron Energy =                  -1.1977583010586907
+    Two-Electron Energy =                   0.1322978002396819
+    Total Energy =                         -0.9331661981515088
+
+  UHF NO Occupations:
+  HONO-0 :    1  A 1.0044684
+  LUNO+0 :    2  A 0.9955316
+
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:    -0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on atl1-1-02-012-10-l.pace.gatech.edu at Tue May 17 16:41:03 2022
+Module time:
+	user time   =       0.10 seconds =       0.00 minutes
+	system time =       0.00 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       1.01 seconds =       0.02 minutes
+	system time =       0.03 seconds =       0.00 minutes
+	total time  =          2 seconds =       0.03 minutes
+Table of Results 
+         R          E(UHF)
+      0.25   -0.3050353861
+       0.5   -1.0430227795
+      0.75   -1.1161753863
+         1   -1.0661355662
+      1.25   -0.9941953163
+       1.5   -0.9577019768
+         2   -0.9372246391
+         3   -0.9332853799
+         4   -0.9331661982
+
+    Psi4 stopped on: Tuesday, 17 May 2022 04:41PM
+    Psi4 wall time for execution: 0:00:01.46
+
+*** Psi4 exiting successfully. Buy a developer a beer!
