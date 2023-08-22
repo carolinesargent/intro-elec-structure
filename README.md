@@ -1,6 +1,5 @@
-#Introductory electronic structure / applied quantum chemistry material
-###Caroline Sargent
-###August 2023
+## Introductory electronic structure / applied quantum chemistry material
+##### Caroline Sargent, August 2023
 
 This directory contains notes and exercises intended to introduce students to electronic structure theory and Psi4. The following topics are covered:
 1. UHF vs RHF
