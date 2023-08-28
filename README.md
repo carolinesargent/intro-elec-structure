@@ -18,7 +18,7 @@ Schedule:
 | 0 | | The Schrodinger Equation and HF Theory; slides 12-15, 28-35 |
 | 1 | UHF vs RHF: the case of H<sub>2</sub> | Post-HF Methods: slides 3-4, 8-9, 12, 15-19, 27-37 |
 | 2 | Post-HF methods in Psi4, recording energies and timings, creating XYZs with Avogadro, density fitting | Basis Sets; slides 1-9, 11, 14-15, 17, 19-end|
-| 3 | Basis set extrapolation (manual and automated) | Other energy corrections |
+| 3 | Basis set extrapolation (manual and automated) | PDF: other energy corrections |
 | 4 | Computing different energy corrections in Psi4 | Geometry Optimizations and Frequency Calculations |
 | 5 | Optimizing geometries and computing frequencies, comparison to experiment, validation of minima | Interaction Energies and BSSE |
 | 6 | Supermolecular vs SAPT, SAPT components, CP correction | DFT | 
@@ -28,4 +28,5 @@ Recommended resources:
 - Dr. Sherrill's YouTube
 - Jensen's Introduction to Computational Chemistry
 - Szabo and Ostlund's Modern Quantum Chemistry
+
 Download the latter two at `/theoryfs2/ds/cdsgroup/Books/Quantum-Computational-Chemistry/`
