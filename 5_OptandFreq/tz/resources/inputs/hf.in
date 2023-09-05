@@ -1,0 +1,25 @@
+#PSI4 file for HOH opt
+
+memory 10 GB
+
+molecule mol {
+0 1
+H 
+O 1 OH
+H 2 OH 1 HOH
+
+OH = 1
+HOH = 104.5
+}
+
+set {
+  scf_type df
+  mp2_type df
+  cc_type df
+  freeze_core true
+  basis cc-pvtz
+}
+
+optimize('hf')
+frequencies('hf', dertype=1)
+
