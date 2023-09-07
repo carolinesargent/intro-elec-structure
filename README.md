@@ -21,7 +21,7 @@ Schedule:
 | 3 | Basis set extrapolation (manual and automated) | PDF: other energy corrections |
 | 4 | Computing different energy corrections in Psi4 | Geometry Optimizations and Frequency Calculations |
 | 5 | Optimizing geometries and computing frequencies, comparison to experiment, validation of minima | FreyReview.pdf (intro only), PatkowskiReview.pdf (intro only), BSSE pdf (through eqn 7) |
-| 6 | Supermolecular vs SAPT, SAPT components, CP correction | DFT | 
+| 6 | Supermolecular vs SAPT, SAPT components, CP correction | DFT-intro.pdf (all), BurshPerspective.pdf (glance) | 
 | 7 | DFT calculations, dipsersion corrections | |
 
 Recommended resources:
